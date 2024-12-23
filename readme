@@ -29,10 +29,6 @@ Verifies the user's credentials.
 Generates a JWT upon successful login.
 Returns the JWT to the user.
 
-User details updation: router.put('/:id', userController.userUpdate);
-
-Delete user: router.delete('/:id', userController.userDelete);
-
 User Authorisation and authentication based on role: router.get('/auth', userController.userAuth);
 
 Decodes the token to get the user's information.
