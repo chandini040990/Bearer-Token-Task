@@ -1,0 +1,44 @@
+User Authentication and Authorization with Bearer Token
+
+Implemented user authentication and authorization using Bearer tokens in a Node.js application with Express.js, Mongoose, and JWT. The application follows the MVC pattern and include API documentation.
+
+
+Techstacks needs to be used : 
+
+Node.js
+Express.js
+Mongoose (MongoDB)
+Postman
+
+How it works:
+Follows the MVC pattern with separate folders for models, views, and controllers.
+Set up a MongoDB database using Mongoose.
+
+Routes:
+Get users: router.get('/users', userController.getUsers); 
+
+Registration: router.post('/register', userController.userRegister);
+
+Hashes the user's password before saving it to the database.
+Returns a success message upon successful registration.
+
+
+Login: router.post('/login', userController.userLogin);
+
+Verifies the user's credentials.
+Generates a JWT upon successful login.
+Returns the JWT to the user.
+
+User details updation: router.put('/:id', userController.userUpdate);
+
+Delete user: router.delete('/:id', userController.userDelete);
+
+User Authorisation and authentication based on role: router.get('/auth', userController.userAuth);
+
+Decodes the token to get the user's information.
+Attaches the user's information to the request object.
+Uses the token verification middleware to protect this route.
+Returns the user's information retrieved from the token.
+
+Render link:
+https://bearer-token-task.onrender.com/api/users

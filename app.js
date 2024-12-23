@@ -1,5 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
 const connectDB = require("./config/db");
 const userRoutes = require("./router/userRoutes");
 
@@ -12,12 +13,12 @@ const app = express();
 connectDB();
 
 // middleware to parese the json request
-app.use(express.json());
+app.use(bodyParser.json());
 
 // routes
 app.use("/api", userRoutes);
 
-const PORT = 3002;
+const PORT = process.env.PORT || 6001;
 app.listen(PORT, () => {
     console.log(`Server is running at the URL http://localhost:${PORT}`)
 })

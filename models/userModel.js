@@ -16,9 +16,9 @@ const userSchema = new mongoose.Schema({
         type: String, required: true
     },
 
-    hashedPassword: {
-        type: String, required: false
-    },
+    // hashedPassword: {
+    //     type: String, required: false
+    // },
 
     role: {
         type: String, required: true

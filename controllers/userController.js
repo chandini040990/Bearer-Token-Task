@@ -37,8 +37,8 @@ exports.userRegister = async (req, res) => {
                 const newUser = new User({
                     username: username,
                     email: email,
-                    password: password,
-                    hashedPassword: hashedPassword,
+                    password: hashedPassword,
+                    // hashedPassword: hashedPassword,
                     role: role
                 });
                 newUser.save();
@@ -59,21 +59,21 @@ exports.userRegister = async (req, res) => {
 
 exports.userLogin = async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { email, password } = req.body;
 
         //find the user by username
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ email });
 
         // check if the user exits and password matches
 
         if (user) {
 
-            bcrypt.compare(password, user.hashedPassword, (err, result) => {
+            bcrypt.compare(password, user.password, (err, result) => {
                 if (err) {
                     return res.json({ message: "error comparing the passwords", err })
                 } else {
                     if (result) {
-                        res.json({ message: "password is correct" })
+                        // res.json({ message: "password is correct" })
                         //create the payload based on the user role
                         const payload = {
                             username: user.username,
@@ -103,49 +103,49 @@ exports.userLogin = async (req, res) => {
 }
 
 // Update a user details
-exports.userUpdate = async (req, res) => {
-    try {
-        const recipe = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
-        if (!recipe) {
-            return res.status(404).json({
-                message: "User not found"
-            })
-        }
-        res.status(200).json({
-            message: "user details updated successfully",
-            data: recipe
-        });
+// exports.userUpdate = async (req, res) => {
+//     try {
+//         const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+//         if (!user) {
+//             return res.status(404).json({
+//                 message: "User not found"
+//             })
+//         }
+//         res.status(200).json({
+//             message: "user details updated successfully",
+//             data: user
+//         });
 
-    } catch (error) {
-        res.status(400).json({
-            message: "Error Updating the user details",
-            error: error.message
-        })
-    }
-}
+//     } catch (error) {
+//         res.status(400).json({
+//             message: "Error Updating the user details",
+//             error: error.message
+//         })
+//     }
+// }
 
 
-// Delete a user
-exports.userDelete = async (req, res) => {
-    try {
-        const recipe = await User.findByIdAndDelete(req.params.id);
-        if (!recipe) {
-            return res.status(404).json({
-                message: "User not found"
-            })
-        }
-        res.status(200).json({
-            message: "user deleted successfully",
-            data: recipe
-        });
+// // Delete a user
+// exports.userDelete = async (req, res) => {
+//     try {
+//         const user = await User.findByIdAndDelete(req.params.id);
+//         if (!user) {
+//             return res.status(404).json({
+//                 message: "User not found"
+//             })
+//         }
+//         res.status(200).json({
+//             message: "user deleted successfully",
+//             data: user
+//         });
 
-    } catch (error) {
-        res.status(400).json({
-            message: "Error deleting the user",
-            error: error.message
-        })
-    }
-}
+//     } catch (error) {
+//         res.status(400).json({
+//             message: "Error deleting the user",
+//             error: error.message
+//         })
+//     }
+// }
 
 // // middlware to protect the routes and authorise user based on role
 
